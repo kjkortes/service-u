@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 20% 95%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 158 74% 15%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 12% 90%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 45 12% 90%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 158 74% 15%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 16 68% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 45 12% 85%;
+    --input: 45 12% 85%;
+    --ring: 158 74% 15%;
+    --radius: 0.75rem;
+
+    --su-bg-primary: #F7F6F0;
+    --su-bg-secondary: #FFFFFF;
+    --su-bg-tertiary: #EDEADF;
+    --su-bg-accent: #0F3D2E;
+    --su-text-primary: #1A1A1A;
+    --su-text-secondary: #5A5A5A;
+    --su-text-tertiary: #8A8A8A;
+    --su-brand-green: #0F3D2E;
+    --su-brand-green-light: #1A5C45;
+    --su-status-available: #2E8B57;
+    --su-status-urgent: #C45628;
+    --su-star-gold: #D4A843;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer base {
+  @keyframes pulse-dot {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes checkmark-draw {
+    from { stroke-dashoffset: 100; }
+    to { stroke-dashoffset: 0; }
+  }
+}
