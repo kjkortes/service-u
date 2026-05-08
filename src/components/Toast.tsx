@@ -23,10 +23,10 @@ export default function Toast() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          className="fixed top-4 left-4 right-4 z-[200] flex items-center justify-center"
+          className="fixed top-4 left-4 right-4 z-[200] flex items-center justify-center pointer-events-none"
         >
           <div
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 pointer-events-auto"
             style={{
               background: '#FFFFFF',
               borderRadius: '12px',
