@@ -14,7 +14,7 @@ export default function TopNav() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const activeTab = location.pathname === '/' ? 'home' : 'bookings'
+  const activeTab = location.pathname === '/' ? 'home' : location.pathname.startsWith('/category') || location.pathname.startsWith('/listings') || location.pathname.startsWith('/profile') || location.pathname.startsWith('/booking') ? 'bookings' : ''
 
   return (
     <nav
@@ -64,9 +64,7 @@ export default function TopNav() {
                 if (tab.id === 'home') {
                   navigate('/')
                 } else if (tab.id === 'bookings') {
-                  if (location.pathname !== '/') {
-                    showToast('Your bookings will appear here')
-                  }
+                  navigate('/category')
                 } else {
                   showToast('Coming soon!')
                 }
