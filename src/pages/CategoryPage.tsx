@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Heart, Hammer, Sparkles, Wrench, AlertCircle } from 'lucide-react'
@@ -13,7 +14,8 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
 }
 
 export default function CategoryPage() {
-  const { navigate, goBack, setCategory, setShowFoliage } = useStore()
+  const { setShowFoliage } = useStore()
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -43,8 +45,7 @@ export default function CategoryPage() {
   }, [])
 
   const handleCategorySelect = (categoryId: string) => {
-    setCategory(categoryId)
-    navigate('listings')
+    navigate(`/listings/${categoryId}`)
   }
 
   return (
@@ -71,7 +72,7 @@ export default function CategoryPage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={goBack}
+          onClick={() => navigate(-1)}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
         </button>

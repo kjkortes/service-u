@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { MapPin, TrendingUp } from 'lucide-react'
@@ -7,7 +8,7 @@ import { useStore } from '../store'
 gsap.registerPlugin()
 
 export default function LandingPage() {
-  const { navigate, setShowFoliage } = useStore()
+  const { setShowFoliage } = useStore()
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -196,8 +197,9 @@ export default function LandingPage() {
           className="flex w-full flex-col items-center"
           style={{ marginTop: '32px', maxWidth: '320px' }}
         >
-          <button
-            className="cta-primary w-full active:scale-[0.97] transition-transform duration-100"
+          <Link
+            to="/category"
+            className="cta-primary w-full active:scale-[0.97] transition-transform duration-100 flex items-center justify-center"
             style={{
               height: '52px',
               background: '#FFFFFF',
@@ -207,12 +209,12 @@ export default function LandingPage() {
               fontWeight: 600,
               boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
             }}
-            onClick={() => navigate('category')}
           >
             Book Now
-          </button>
-          <button
-            className="cta-secondary w-full active:scale-[0.97] active:bg-white/10 transition-all duration-100"
+          </Link>
+          <Link
+            to="/signup"
+            className="cta-secondary w-full active:scale-[0.97] active:bg-white/10 transition-all duration-100 flex items-center justify-center"
             style={{
               height: '48px',
               background: 'transparent',
@@ -223,10 +225,9 @@ export default function LandingPage() {
               border: '1.5px solid rgba(255,255,255,0.5)',
               marginTop: '12px',
             }}
-            onClick={() => navigate('signup')}
           >
             Apply as Provider
-          </button>
+          </Link>
         </div>
       </div>
     </div>

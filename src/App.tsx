@@ -1,4 +1,5 @@
 import { useEffect, lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router'
 import { useStore } from './store'
 import FoliageBackground from './components/FoliageBackground'
 import BottomNav from './components/BottomNav'
@@ -32,9 +33,9 @@ function LoadingFallback() {
 }
 
 export default function App() {
-  const { currentPage, showFoliage } = useStore()
+  const { showFoliage } = useStore()
+  const location = useLocation()
 
-  // Register service worker for PWA
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -45,7 +46,6 @@ export default function App() {
     }
   }, [])
 
-  // Prevent body scroll on mobile
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     document.body.style.position = 'fixed'
@@ -59,35 +59,12 @@ export default function App() {
     }
   }, [])
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'landing':
-        return <LandingPage />
-      case 'category':
-        return <CategoryPage />
-      case 'listings':
-        return <ListingsPage />
-      case 'profile':
-        return <ProfilePage />
-      case 'booking':
-        return <BookingPage />
-      case 'booking-confirmation':
-        return <BookingPage />
-      case 'signup':
-        return <SignupPage />
-      default:
-        return <LandingPage />
-    }
-  }
-
-  const showNav = ['landing', 'listings', 'booking-confirmation'].includes(currentPage)
+  const showNav = location.pathname === '/' || location.pathname.startsWith('/listings/')
 
   return (
     <div className="relative" style={{ height: '100vh', overflow: 'hidden' }}>
-      {/* Foliage Background */}
       {showFoliage && <FoliageBackground />}
 
-      {/* Main Content */}
       <main
         className="relative z-[1]"
         style={{
@@ -98,14 +75,19 @@ export default function App() {
         }}
       >
         <Suspense fallback={<LoadingFallback />}>
-          {renderPage()}
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/listings/:categoryId" element={<ListingsPage />} />
+            <Route path="/profile/:providerId" element={<ProfilePage />} />
+            <Route path="/booking/:providerId" element={<BookingPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+          </Routes>
         </Suspense>
       </main>
 
-      {/* Toast */}
       <Toast />
 
-      {/* Bottom Navigation */}
       {showNav && <BottomNav />}
     </div>
   )

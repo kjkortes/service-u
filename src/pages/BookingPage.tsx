@@ -1,12 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
+import { useParams, useNavigate } from 'react-router'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check, Clock } from 'lucide-react'
 import { useStore } from '../store'
+import { getProviderById } from '../data'
 
 export default function BookingPage() {
-  const { navigate, goBack, selectedProvider, setShowFoliage } = useStore()
+  const { setShowFoliage } = useStore()
+  const { providerId } = useParams<{ providerId: string }>()
+  const navigate = useNavigate()
+  const selectedProvider = providerId ? getProviderById(providerId) : undefined
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -47,7 +52,7 @@ export default function BookingPage() {
   }
 
   const handleBackToHome = () => {
-    navigate('landing')
+    navigate('/')
   }
 
   if (!selectedProvider) {
@@ -74,7 +79,7 @@ export default function BookingPage() {
       <button
         className="relative z-10 ml-auto active:opacity-70 transition-opacity"
         style={{ padding: '16px' }}
-        onClick={goBack}
+        onClick={() => navigate(-1)}
       >
         <X size={24} color="#FFFFFF" />
       </button>

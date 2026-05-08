@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useParams, useNavigate } from 'react-router'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, SlidersHorizontal } from 'lucide-react'
@@ -8,7 +9,9 @@ import { getProvidersByCategory, categories } from '../data'
 const filters = ['All', 'Available Today', 'Top Rated', 'Near Me']
 
 export default function ListingsPage() {
-  const { navigate, goBack, selectedCategory, setProvider, setShowFoliage } = useStore()
+  const { setShowFoliage } = useStore()
+  const { categoryId } = useParams<{ categoryId: string }>()
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeFilter, setActiveFilter] = useState('All')
 
@@ -17,9 +20,9 @@ export default function ListingsPage() {
   }, [setShowFoliage])
 
   const categoryName =
-    categories.find((c) => c.id === selectedCategory)?.name || 'Services'
-  const allProviders = selectedCategory
-    ? getProvidersByCategory(selectedCategory)
+    categories.find((c) => c.id === categoryId)?.name || 'Services'
+  const allProviders = categoryId
+    ? getProvidersByCategory(categoryId)
     : []
 
   const filteredProviders =
@@ -44,8 +47,7 @@ export default function ListingsPage() {
   }, [filteredProviders])
 
   const handleProviderTap = (provider: (typeof allProviders)[0]) => {
-    setProvider(provider)
-    navigate('profile')
+    navigate(`/profile/${provider.id}`)
   }
 
   return (
@@ -69,7 +71,7 @@ export default function ListingsPage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={goBack}
+          onClick={() => navigate(-1)}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
         </button>

@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from 'react-router'
 import { Home, Calendar, MessageCircle, User } from 'lucide-react'
 import { useStore } from '../store'
 
@@ -9,9 +10,11 @@ const tabs = [
 ] as const
 
 export default function BottomNav() {
-  const { currentPage, navigate, showToast } = useStore()
+  const { showToast } = useStore()
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const activeTab = currentPage === 'landing' ? 'home' : 'bookings'
+  const activeTab = location.pathname === '/' ? 'home' : 'bookings'
 
   return (
     <nav
@@ -38,9 +41,9 @@ export default function BottomNav() {
             }}
             onClick={() => {
               if (tab.id === 'home') {
-                navigate('landing')
+                navigate('/')
               } else if (tab.id === 'bookings') {
-                if (currentPage !== 'booking-confirmation') {
+                if (location.pathname !== '/') {
                   showToast('Your bookings will appear here')
                 }
               } else {

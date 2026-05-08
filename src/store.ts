@@ -19,52 +19,21 @@ export interface Provider {
 }
 
 interface AppState {
-  currentPage: string
-  previousPage: string | null
-  selectedCategory: string | null
-  selectedProvider: Provider | null
   bookingState: 'idle' | 'submitting' | 'confirmed'
   toast: { message: string } | null
   showFoliage: boolean
 
-  navigate: (page: string) => void
-  goBack: () => void
-  setCategory: (category: string) => void
-  setProvider: (provider: Provider | null) => void
   setBookingState: (state: 'idle' | 'submitting' | 'confirmed') => void
   showToast: (message: string) => void
   clearToast: () => void
   setShowFoliage: (show: boolean) => void
 }
 
-export const useStore = create<AppState>((set, get) => ({
-  currentPage: 'landing',
-  previousPage: null,
-  selectedCategory: null,
-  selectedProvider: null,
+export const useStore = create<AppState>((set) => ({
   bookingState: 'idle',
   toast: null,
   showFoliage: true,
 
-  navigate: (page) => {
-    const state = get()
-    set({
-      previousPage: state.currentPage,
-      currentPage: page,
-    })
-  },
-
-  goBack: () => {
-    const state = get()
-    if (state.previousPage) {
-      set({ currentPage: state.previousPage, previousPage: null })
-    } else {
-      set({ currentPage: 'landing' })
-    }
-  },
-
-  setCategory: (category) => set({ selectedCategory: category }),
-  setProvider: (provider) => set({ selectedProvider: provider }),
   setBookingState: (bookingState) => set({ bookingState }),
   showToast: (message) => set({ toast: { message } }),
   clearToast: () => set({ toast: null }),

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Wallet, Users, Shield } from 'lucide-react'
@@ -8,7 +9,8 @@ import { categories } from '../data'
 const serviceOptions = categories.map((c) => c.name)
 
 export default function SignupPage() {
-  const { navigate, goBack, setShowFoliage, showToast } = useStore()
+  const { setShowFoliage, showToast } = useStore()
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
   const [formData, setFormData] = useState({
     name: '',
@@ -54,7 +56,7 @@ export default function SignupPage() {
     setSubmitted(true)
     showToast('Application submitted! We\'ll review within 24 hours.')
     setTimeout(() => {
-      navigate('landing')
+      navigate('/')
     }, 2500)
   }
 
@@ -85,7 +87,7 @@ export default function SignupPage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={goBack}
+          onClick={() => navigate(-1)}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
         </button>

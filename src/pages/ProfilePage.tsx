@@ -1,12 +1,17 @@
 import { useEffect, useRef } from 'react'
+import { useParams, useNavigate } from 'react-router'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, Share2, Clock, Shield } from 'lucide-react'
 import { useStore } from '../store'
+import { getProviderById } from '../data'
 
 export default function ProfilePage() {
-  const { navigate, goBack, selectedProvider, setShowFoliage } = useStore()
+  const { setShowFoliage } = useStore()
+  const { providerId } = useParams<{ providerId: string }>()
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
+  const selectedProvider = providerId ? getProviderById(providerId) : undefined
 
   useEffect(() => {
     setShowFoliage(true)
@@ -57,7 +62,7 @@ export default function ProfilePage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={goBack}
+          onClick={() => navigate(-1)}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
           <span
@@ -391,7 +396,7 @@ export default function ProfilePage() {
             fontWeight: 600,
             boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
           }}
-          onClick={() => navigate('booking')}
+          onClick={() => navigate(`/booking/${providerId}`)}
         >
           Book Now — {selectedProvider.priceRange.split('–')[0].trim()}
         </button>

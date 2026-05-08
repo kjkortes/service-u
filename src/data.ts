@@ -407,3 +407,11 @@ export const providers: Record<string, Provider[]> = {
 export function getProvidersByCategory(category: string): Provider[] {
   return providers[category] || []
 }
+
+export function getProviderById(id: string): Provider | undefined {
+  for (const catProviders of Object.values(providers)) {
+    const found = catProviders.find(p => p.id === id)
+    if (found) return found
+  }
+  return undefined
+}
