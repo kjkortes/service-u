@@ -85,7 +85,7 @@ export default function LandingPage() {
           />
           <span
             style={{
-              fontSize: '20px',
+              fontSize: isMobile ? '20px' : '24px',
               fontWeight: 700,
               color: '#FFFFFF',
               textShadow: '0 2px 8px rgba(0,0,0,0.3)',
@@ -107,7 +107,7 @@ export default function LandingPage() {
           <MapPin size={14} color="rgba(255,255,255,0.7)" />
           <span
             style={{
-              fontSize: '13px',
+              fontSize: isMobile ? '13px' : '14px',
               fontWeight: 500,
               color: '#FFFFFF',
             }}
@@ -126,13 +126,13 @@ export default function LandingPage() {
         <h1
           className="hero-headline text-center"
           style={{
-            fontSize: '32px',
+            fontSize: isMobile ? '32px' : '56px',
             fontWeight: 700,
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
             color: '#FFFFFF',
             textShadow: '0 2px 12px rgba(0,0,0,0.4)',
-            maxWidth: '300px',
+            maxWidth: isMobile ? '300px' : '640px',
           }}
         >
           Pangita og serbisyo? Dali ra diri.
@@ -142,12 +142,12 @@ export default function LandingPage() {
         <p
           className="hero-subtext text-center"
           style={{
-            fontSize: '15px',
+            fontSize: isMobile ? '15px' : '20px',
             fontWeight: 400,
             lineHeight: 1.5,
             color: 'rgba(255,255,255,0.85)',
-            marginTop: '12px',
-            maxWidth: '280px',
+            marginTop: isMobile ? '12px' : '16px',
+            maxWidth: isMobile ? '280px' : '520px',
             textShadow: '0 1px 4px rgba(0,0,0,0.3)',
           }}
         >
@@ -157,7 +157,7 @@ export default function LandingPage() {
         {/* Activity Row */}
         <div
           className="activity-row flex items-center justify-center gap-4"
-          style={{ marginTop: '24px' }}
+          style={{ marginTop: isMobile ? '24px' : '32px' }}
         >
           <div className="flex items-center gap-1.5">
             <div
@@ -171,7 +171,7 @@ export default function LandingPage() {
             />
             <span
               style={{
-                fontSize: '11px',
+                fontSize: isMobile ? '11px' : '14px',
                 fontWeight: 500,
                 color: 'rgba(255,255,255,0.85)',
                 letterSpacing: '0.02em',
@@ -181,10 +181,10 @@ export default function LandingPage() {
             </span>
           </div>
           <div className="flex items-center gap-1">
-            <TrendingUp size={12} color="rgba(255,255,255,0.7)" />
+            <TrendingUp size={isMobile ? 12 : 16} color="rgba(255,255,255,0.7)" />
             <span
               style={{
-                fontSize: '11px',
+                fontSize: isMobile ? '11px' : '14px',
                 fontWeight: 500,
                 color: 'rgba(255,255,255,0.85)',
                 letterSpacing: '0.02em',
@@ -198,17 +198,17 @@ export default function LandingPage() {
         {/* CTA Buttons */}
         <div
           className="flex w-full flex-col items-center"
-          style={{ marginTop: '32px', maxWidth: '320px' }}
+          style={{ marginTop: isMobile ? '32px' : '48px', maxWidth: isMobile ? '320px' : '420px' }}
         >
           <Link
             to="/category"
             className="cta-primary w-full active:scale-[0.97] transition-transform duration-100 flex items-center justify-center"
             style={{
-              height: '52px',
+              height: isMobile ? '52px' : '60px',
               background: '#FFFFFF',
               color: '#0F3D2E',
               borderRadius: '12px',
-              fontSize: '16px',
+              fontSize: isMobile ? '16px' : '18px',
               fontWeight: 600,
               boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
             }}
@@ -219,14 +219,14 @@ export default function LandingPage() {
             to="/signup"
             className="cta-secondary w-full active:scale-[0.97] active:bg-white/10 transition-all duration-100 flex items-center justify-center"
             style={{
-              height: '48px',
+              height: isMobile ? '48px' : '56px',
               background: 'transparent',
               color: '#FFFFFF',
               borderRadius: '12px',
-              fontSize: '16px',
+              fontSize: isMobile ? '16px' : '18px',
               fontWeight: 600,
               border: '1.5px solid rgba(255,255,255,0.5)',
-              marginTop: '12px',
+              marginTop: isMobile ? '12px' : '16px',
             }}
           >
             Apply as Provider
