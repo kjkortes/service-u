@@ -4,10 +4,12 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, Share2, Clock, Shield } from 'lucide-react'
 import { useStore } from '../store'
+import { useLayout } from '../context/LayoutContext'
 import { getProviderById } from '../data'
 
 export default function ProfilePage() {
   const { setShowFoliage } = useStore()
+  const { isMobile } = useLayout()
   const { providerId } = useParams<{ providerId: string }>()
   const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -42,7 +44,10 @@ export default function ProfilePage() {
     <div
       ref={containerRef}
       className="relative flex min-h-screen flex-col"
-      style={{ paddingBottom: '140px' }}
+      style={{
+        paddingBottom: isMobile ? '140px' : undefined,
+        paddingTop: isMobile ? undefined : '56px',
+      }}
     >
       {/* Background Overlay */}
       <div

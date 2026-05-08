@@ -5,10 +5,12 @@ import { useGSAP } from '@gsap/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check, Clock } from 'lucide-react'
 import { useStore } from '../store'
+import { useLayout } from '../context/LayoutContext'
 import { getProviderById } from '../data'
 
 export default function BookingPage() {
   const { setShowFoliage } = useStore()
+  const { isMobile } = useLayout()
   const { providerId } = useParams<{ providerId: string }>()
   const navigate = useNavigate()
   const selectedProvider = providerId ? getProviderById(providerId) : undefined
@@ -67,7 +69,10 @@ export default function BookingPage() {
     <div
       ref={containerRef}
       className="relative flex min-h-screen flex-col"
-      style={{ paddingBottom: '80px' }}
+      style={{
+        paddingBottom: isMobile ? '80px' : undefined,
+        paddingTop: isMobile ? undefined : '56px',
+      }}
     >
       {/* Background Overlay */}
       <div

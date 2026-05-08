@@ -1,8 +1,11 @@
 import { useEffect, lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router'
 import { useStore } from './store'
+import { useIsMobile } from './hooks/use-mobile'
+import { LayoutProvider } from './context/LayoutContext'
 import FoliageBackground from './components/FoliageBackground'
 import BottomNav from './components/BottomNav'
+import TopNav from './components/TopNav'
 import Toast from './components/Toast'
 
 const LandingPage = lazy(() => import('./pages/LandingPage'))
@@ -34,6 +37,7 @@ function LoadingFallback() {
 
 export default function App() {
   const { showFoliage } = useStore()
+  const isMobile = useIsMobile()
   const location = useLocation()
 
   useEffect(() => {
@@ -62,33 +66,36 @@ export default function App() {
   const showNav = location.pathname === '/' || location.pathname.startsWith('/listings/')
 
   return (
-    <div className="relative" style={{ height: '100vh', overflow: 'hidden' }}>
-      {showFoliage && <FoliageBackground />}
+    <LayoutProvider>
+      <div className="relative" style={{ height: '100vh', overflow: 'hidden' }}>
+        {showFoliage && <FoliageBackground />}
 
-      <main
-        className="relative z-[1]"
-        style={{
-          height: '100vh',
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          WebkitOverflowScrolling: 'touch',
-        }}
-      >
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/category" element={<CategoryPage />} />
-            <Route path="/listings/:categoryId" element={<ListingsPage />} />
-            <Route path="/profile/:providerId" element={<ProfilePage />} />
-            <Route path="/booking/:providerId" element={<BookingPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-          </Routes>
-        </Suspense>
-      </main>
+        <main
+          className="relative z-[1]"
+          style={{
+            height: '100vh',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/category" element={<CategoryPage />} />
+              <Route path="/listings/:categoryId" element={<ListingsPage />} />
+              <Route path="/profile/:providerId" element={<ProfilePage />} />
+              <Route path="/booking/:providerId" element={<BookingPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+            </Routes>
+          </Suspense>
+        </main>
 
-      <Toast />
+        <Toast />
 
-      {showNav && <BottomNav />}
-    </div>
+        {showNav && !isMobile && <TopNav />}
+        {showNav && isMobile && <BottomNav />}
+      </div>
+    </LayoutProvider>
   )
 }

@@ -4,12 +4,14 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Wallet, Users, Shield } from 'lucide-react'
 import { useStore } from '../store'
+import { useLayout } from '../context/LayoutContext'
 import { categories } from '../data'
 
 const serviceOptions = categories.map((c) => c.name)
 
 export default function SignupPage() {
   const { setShowFoliage, showToast } = useStore()
+  const { isMobile } = useLayout()
   const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
   const [formData, setFormData] = useState({
@@ -72,7 +74,8 @@ export default function SignupPage() {
       className="relative flex min-h-screen flex-col"
       style={{
         background: '#F7F6F0',
-        paddingBottom: '80px',
+        paddingBottom: isMobile ? '80px' : undefined,
+        paddingTop: isMobile ? undefined : '56px',
       }}
     >
       {/* Header Bar */}

@@ -4,12 +4,14 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, SlidersHorizontal } from 'lucide-react'
 import { useStore } from '../store'
+import { useLayout } from '../context/LayoutContext'
 import { getProvidersByCategory, categories } from '../data'
 
 const filters = ['All', 'Available Today', 'Top Rated', 'Near Me']
 
 export default function ListingsPage() {
   const { setShowFoliage } = useStore()
+  const { isMobile } = useLayout()
   const { categoryId } = useParams<{ categoryId: string }>()
   const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -56,7 +58,8 @@ export default function ListingsPage() {
       className="relative flex min-h-screen flex-col"
       style={{
         background: '#F7F6F0',
-        paddingBottom: '80px',
+        paddingBottom: isMobile ? '80px' : undefined,
+        paddingTop: isMobile ? undefined : '56px',
       }}
     >
       {/* Header Bar */}

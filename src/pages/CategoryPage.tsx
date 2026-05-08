@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Heart, Hammer, Sparkles, Wrench, AlertCircle } from 'lucide-react'
 import { useStore } from '../store'
+import { useLayout } from '../context/LayoutContext'
 import { categories } from '../data'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
@@ -15,6 +16,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
 
 export default function CategoryPage() {
   const { setShowFoliage } = useStore()
+  const { isMobile } = useLayout()
   const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -52,7 +54,10 @@ export default function CategoryPage() {
     <div
       ref={containerRef}
       className="relative flex min-h-screen flex-col"
-      style={{ paddingBottom: '80px' }}
+      style={{
+        paddingBottom: isMobile ? '80px' : undefined,
+        paddingTop: isMobile ? undefined : '56px',
+      }}
     >
       {/* Dark overlay for readability */}
       <div

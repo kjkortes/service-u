@@ -4,11 +4,13 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { MapPin, TrendingUp } from 'lucide-react'
 import { useStore } from '../store'
+import { useLayout } from '../context/LayoutContext'
 
 gsap.registerPlugin()
 
 export default function LandingPage() {
   const { setShowFoliage } = useStore()
+  const { isMobile } = useLayout()
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -56,7 +58,8 @@ export default function LandingPage() {
       className="relative flex flex-col"
       style={{
         minHeight: '100vh',
-        paddingBottom: '80px',
+        paddingBottom: isMobile ? '80px' : undefined,
+        paddingTop: isMobile ? undefined : '56px',
       }}
     >
       {/* Dark overlay for text readability */}
