@@ -93,7 +93,7 @@ export default function App() {
 
         <Toast />
 
-        {showNav && !isMobile && <TopNav />}
+        {!isMobile && <TopNav />}
         {showNav && isMobile && <BottomNav />}
       </div>
     </LayoutProvider>
