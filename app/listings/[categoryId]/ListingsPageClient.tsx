@@ -5,9 +5,9 @@ import { useParams, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, SlidersHorizontal } from 'lucide-react'
-import { useStore } from '@/store'
-import { useLayout } from '@/context/LayoutContext'
-import { getProvidersByCategory, categories } from '@/data'
+import { useStore } from '@/_store'
+import { useLayout } from '@/_context/LayoutContext'
+import { getProvidersByCategory, categories } from '@/_lib/data'
 
 const filters = ['All', 'Available Today', 'Top Rated', 'Near Me']
 

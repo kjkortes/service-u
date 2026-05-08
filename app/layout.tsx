@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import '@/index.css'
-import ClientLayout from '@/components/ClientLayout'
+import '@/globals.css'
+import ClientLayout from '@/_components/ClientLayout'
 
 export const metadata: Metadata = {
   title: 'Service-U Cebu',

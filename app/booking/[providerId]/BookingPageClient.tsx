@@ -6,9 +6,9 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check, Clock } from 'lucide-react'
-import { useStore } from '@/store'
-import { useLayout } from '@/context/LayoutContext'
-import { getProviderById } from '@/data'
+import { useStore } from '@/_store'
+import { useLayout } from '@/_context/LayoutContext'
+import { getProviderById } from '@/_lib/data'
 
 export default function BookingPageClient() {
   const { setShowFoliage } = useStore()

@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { MapPin, TrendingUp } from 'lucide-react'
-import { useStore } from '@/store'
-import { useLayout } from '@/context/LayoutContext'
+import { useStore } from '@/_store'
+import { useLayout } from '@/_context/LayoutContext'
 
 gsap.registerPlugin()
 

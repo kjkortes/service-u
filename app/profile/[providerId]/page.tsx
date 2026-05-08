@@ -1,4 +1,4 @@
-import { providers } from '@/data'
+import { providers } from '@/_lib/data'
 import ProfilePageClient from './ProfilePageClient'
 
 export function generateStaticParams() {

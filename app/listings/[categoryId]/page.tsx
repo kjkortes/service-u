@@ -1,4 +1,4 @@
-import { categories } from '@/data'
+import { categories } from '@/_lib/data'
 import ListingsPageClient from './ListingsPageClient'
 
 export function generateStaticParams() {

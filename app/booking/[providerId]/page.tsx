@@ -1,4 +1,4 @@
-import { providers } from '@/data'
+import { providers } from '@/_lib/data'
 import BookingPageClient from './BookingPageClient'
 
 export function generateStaticParams() {

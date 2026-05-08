@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Heart, Hammer, Sparkles, Wrench, AlertCircle } from 'lucide-react'
-import { useStore } from '@/store'
-import { useLayout } from '@/context/LayoutContext'
-import { categories } from '@/data'
+import { useStore } from '@/_store'
+import { useLayout } from '@/_context/LayoutContext'
+import { categories } from '@/_lib/data'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
   Heart,

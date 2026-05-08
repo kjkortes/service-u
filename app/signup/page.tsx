@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Wallet, Users, Shield } from 'lucide-react'
-import { useStore } from '@/store'
-import { useLayout } from '@/context/LayoutContext'
-import { categories } from '@/data'
+import { useStore } from '@/_store'
+import { useLayout } from '@/_context/LayoutContext'
+import { categories } from '@/_lib/data'
 
 const serviceOptions = categories.map((c) => c.name)
 

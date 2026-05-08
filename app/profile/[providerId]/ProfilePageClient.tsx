@@ -5,9 +5,9 @@ import { useParams, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, Share2, Clock, Shield } from 'lucide-react'
-import { useStore } from '@/store'
-import { useLayout } from '@/context/LayoutContext'
-import { getProviderById } from '@/data'
+import { useStore } from '@/_store'
+import { useLayout } from '@/_context/LayoutContext'
+import { getProviderById } from '@/_lib/data'
 
 export default function ProfilePageClient() {
   const { setShowFoliage } = useStore()
