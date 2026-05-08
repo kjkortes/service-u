@@ -1,10 +1,12 @@
+'use client'
+
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router'
+import Link from 'next/link'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { MapPin, TrendingUp } from 'lucide-react'
-import { useStore } from '../store'
-import { useLayout } from '../context/LayoutContext'
+import { useStore } from '@/store'
+import { useLayout } from '@/context/LayoutContext'
 
 gsap.registerPlugin()
 
@@ -62,7 +64,6 @@ export default function LandingPage() {
         paddingTop: isMobile ? undefined : '56px',
       }}
     >
-      {/* Dark overlay for text readability */}
       <div
         className="fixed inset-0 z-0"
         style={{
@@ -71,7 +72,6 @@ export default function LandingPage() {
         }}
       />
 
-      {/* Top Bar */}
       <div
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between"
         style={{ padding: '12px 16px', height: '56px' }}
@@ -117,12 +117,10 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Hero Content */}
       <div
         className="relative z-10 flex flex-1 flex-col items-center justify-center px-6"
         style={{ paddingTop: '80px', paddingBottom: '40px' }}
       >
-        {/* Headline */}
         <h1
           className="hero-headline text-center"
           style={{
@@ -138,7 +136,6 @@ export default function LandingPage() {
           Pangita og serbisyo? Dali ra diri.
         </h1>
 
-        {/* Subtext */}
         <p
           className="hero-subtext text-center"
           style={{
@@ -154,7 +151,6 @@ export default function LandingPage() {
           Massage, panday, limpyo balay, ug uban pa
         </p>
 
-        {/* Activity Row */}
         <div
           className="activity-row flex items-center justify-center gap-4"
           style={{ marginTop: isMobile ? '24px' : '32px' }}
@@ -195,13 +191,12 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* CTA Buttons */}
         <div
           className="flex w-full flex-col items-center"
           style={{ marginTop: isMobile ? '32px' : '48px', maxWidth: isMobile ? '320px' : '420px' }}
         >
           <Link
-            to="/category"
+            href="/category"
             className="cta-primary w-full active:scale-[0.97] transition-transform duration-100 flex items-center justify-center"
             style={{
               height: isMobile ? '52px' : '60px',
@@ -216,7 +211,7 @@ export default function LandingPage() {
             Book Now
           </Link>
           <Link
-            to="/signup"
+            href="/signup"
             className="cta-secondary w-full active:scale-[0.97] active:bg-white/10 transition-all duration-100 flex items-center justify-center"
             style={{
               height: isMobile ? '48px' : '56px',

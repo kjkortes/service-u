@@ -1,11 +1,13 @@
+'use client'
+
 import { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Heart, Hammer, Sparkles, Wrench, AlertCircle } from 'lucide-react'
-import { useStore } from '../store'
-import { useLayout } from '../context/LayoutContext'
-import { categories } from '../data'
+import { useStore } from '@/store'
+import { useLayout } from '@/context/LayoutContext'
+import { categories } from '@/data'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
   Heart,
@@ -17,7 +19,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
 export default function CategoryPage() {
   const { setShowFoliage } = useStore()
   const { isMobile } = useLayout()
-  const navigate = useNavigate()
+  const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -26,7 +28,6 @@ export default function CategoryPage() {
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Animate the entire grid as one unit instead of staggering individual cards
       gsap.from('.category-grid-wrapper', {
         y: 20,
         opacity: 0,
@@ -47,7 +48,7 @@ export default function CategoryPage() {
   }, [])
 
   const handleCategorySelect = (categoryId: string) => {
-    navigate(`/listings/${categoryId}`)
+    router.push(`/listings/${categoryId}`)
   }
 
   return (
@@ -59,13 +60,11 @@ export default function CategoryPage() {
         paddingTop: isMobile ? undefined : '56px',
       }}
     >
-      {/* Dark overlay for readability */}
       <div
         className="fixed inset-0 z-0"
         style={{ background: 'rgba(15, 61, 46, 0.5)' }}
       />
 
-      {/* Header Bar */}
       <div
         className="relative z-10 flex items-center"
         style={{
@@ -77,7 +76,7 @@ export default function CategoryPage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={() => navigate(-1)}
+          onClick={() => router.back()}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
         </button>
@@ -93,7 +92,6 @@ export default function CategoryPage() {
         </h2>
       </div>
 
-      {/* Category Grid */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6">
         <div className="category-grid-wrapper grid w-full max-w-[320px] grid-cols-2 gap-3">
           {categories.map((cat) => {
@@ -153,7 +151,6 @@ export default function CategoryPage() {
           })}
         </div>
 
-        {/* Urgency Footer */}
         <div
           className="urgency-footer flex items-center gap-1.5"
           style={{

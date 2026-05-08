@@ -1,18 +1,20 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router'
+import { useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, Wallet, Users, Shield } from 'lucide-react'
-import { useStore } from '../store'
-import { useLayout } from '../context/LayoutContext'
-import { categories } from '../data'
+import { useStore } from '@/store'
+import { useLayout } from '@/context/LayoutContext'
+import { categories } from '@/data'
 
 const serviceOptions = categories.map((c) => c.name)
 
 export default function SignupPage() {
   const { setShowFoliage, showToast } = useStore()
   const { isMobile } = useLayout()
-  const navigate = useNavigate()
+  const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
   const [formData, setFormData] = useState({
     name: '',
@@ -58,7 +60,7 @@ export default function SignupPage() {
     setSubmitted(true)
     showToast('Application submitted! We\'ll review within 24 hours.')
     setTimeout(() => {
-      navigate('/')
+      router.push('/')
     }, 2500)
   }
 
@@ -78,7 +80,6 @@ export default function SignupPage() {
         paddingTop: isMobile ? undefined : '56px',
       }}
     >
-      {/* Header Bar */}
       <div
         className="sticky top-0 z-40 flex items-center"
         style={{
@@ -90,7 +91,7 @@ export default function SignupPage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={() => navigate(-1)}
+          onClick={() => router.back()}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
         </button>
@@ -106,7 +107,6 @@ export default function SignupPage() {
         </h2>
       </div>
 
-      {/* Trust Hero */}
       <div
         className="trust-hero"
         style={{
@@ -137,7 +137,6 @@ export default function SignupPage() {
           Be one of the first providers in your area.
         </p>
 
-        {/* Trust Cards */}
         <div
           className="flex gap-3 no-scrollbar"
           style={{
@@ -178,7 +177,6 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* Signup Form */}
       <div
         className="signup-form relative flex-1"
         style={{
@@ -188,7 +186,6 @@ export default function SignupPage() {
           padding: '24px 16px',
         }}
       >
-        {/* Name */}
         <div style={{ marginBottom: '16px' }}>
           <label
             style={{
@@ -237,7 +234,6 @@ export default function SignupPage() {
           )}
         </div>
 
-        {/* Service */}
         <div style={{ marginBottom: '16px' }}>
           <label
             style={{
@@ -296,7 +292,6 @@ export default function SignupPage() {
           )}
         </div>
 
-        {/* Location */}
         <div style={{ marginBottom: '16px' }}>
           <label
             style={{
@@ -345,7 +340,6 @@ export default function SignupPage() {
           )}
         </div>
 
-        {/* Phone */}
         <div style={{ marginBottom: '16px' }}>
           <label
             style={{
@@ -394,7 +388,6 @@ export default function SignupPage() {
           )}
         </div>
 
-        {/* Submit Button */}
         <button
           className="w-full active:scale-[0.97] active:bg-[#1A5C45] transition-all duration-100"
           style={{
@@ -414,7 +407,6 @@ export default function SignupPage() {
         </button>
       </div>
 
-      {/* Service Selection Sheet */}
       {showServiceSheet && (
         <div
           className="fixed inset-0 z-[200] flex items-end"

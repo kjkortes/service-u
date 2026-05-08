@@ -1,6 +1,8 @@
-import { useLocation, useNavigate } from 'react-router'
+'use client'
+
+import { usePathname, useRouter } from 'next/navigation'
 import { Home, Calendar, MessageCircle, User } from 'lucide-react'
-import { useStore } from '../store'
+import { useStore } from '@/store'
 
 const tabs = [
   { id: 'home', icon: Home, label: 'Home' },
@@ -11,10 +13,10 @@ const tabs = [
 
 export default function BottomNav() {
   const { showToast } = useStore()
-  const location = useLocation()
-  const navigate = useNavigate()
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const activeTab = location.pathname === '/' ? 'home' : location.pathname.startsWith('/category') || location.pathname.startsWith('/listings') || location.pathname.startsWith('/profile') || location.pathname.startsWith('/booking') ? 'bookings' : ''
+  const activeTab = pathname === '/' ? 'home' : pathname.startsWith('/category') || pathname.startsWith('/listings') || pathname.startsWith('/profile') || pathname.startsWith('/booking') ? 'bookings' : ''
 
   return (
     <nav
@@ -41,9 +43,9 @@ export default function BottomNav() {
             }}
             onClick={() => {
               if (tab.id === 'home') {
-                navigate('/')
+                router.push('/')
               } else if (tab.id === 'bookings') {
-                navigate('/category')
+                router.push('/category')
               } else {
                 showToast('Coming soon!')
               }

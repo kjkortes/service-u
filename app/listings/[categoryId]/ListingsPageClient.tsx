@@ -1,19 +1,22 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
-import { useParams, useNavigate } from 'react-router'
+import { useParams, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ChevronLeft, MapPin, Star, SlidersHorizontal } from 'lucide-react'
-import { useStore } from '../store'
-import { useLayout } from '../context/LayoutContext'
-import { getProvidersByCategory, categories } from '../data'
+import { useStore } from '@/store'
+import { useLayout } from '@/context/LayoutContext'
+import { getProvidersByCategory, categories } from '@/data'
 
 const filters = ['All', 'Available Today', 'Top Rated', 'Near Me']
 
-export default function ListingsPage() {
+export default function ListingsPageClient() {
   const { setShowFoliage } = useStore()
   const { isMobile } = useLayout()
-  const { categoryId } = useParams<{ categoryId: string }>()
-  const navigate = useNavigate()
+  const params = useParams()
+  const categoryId = params.categoryId as string
+  const router = useRouter()
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeFilter, setActiveFilter] = useState('All')
 
@@ -49,7 +52,7 @@ export default function ListingsPage() {
   }, [filteredProviders])
 
   const handleProviderTap = (provider: (typeof allProviders)[0]) => {
-    navigate(`/profile/${provider.id}`)
+    router.push(`/profile/${provider.id}`)
   }
 
   return (
@@ -62,7 +65,6 @@ export default function ListingsPage() {
         paddingTop: isMobile ? undefined : '56px',
       }}
     >
-      {/* Header Bar */}
       <div
         className="sticky top-0 z-40 flex items-center"
         style={{
@@ -74,7 +76,7 @@ export default function ListingsPage() {
       >
         <button
           className="flex items-center gap-1 active:opacity-70 transition-opacity"
-          onClick={() => navigate(-1)}
+          onClick={() => router.back()}
         >
           <ChevronLeft size={24} color="#FFFFFF" />
         </button>
@@ -93,7 +95,6 @@ export default function ListingsPage() {
         </button>
       </div>
 
-      {/* Filter Chips */}
       <div
         className="sticky z-30 flex gap-2 no-scrollbar"
         style={{
@@ -130,7 +131,6 @@ export default function ListingsPage() {
         ))}
       </div>
 
-      {/* Provider List */}
       <div className="flex flex-col gap-3 px-4" style={{ paddingTop: '4px' }}>
         {filteredProviders.map((provider) => (
           <button
@@ -144,7 +144,6 @@ export default function ListingsPage() {
             }}
             onClick={() => handleProviderTap(provider)}
           >
-            {/* Photo */}
             <img
               src={provider.image}
               alt={provider.name}
@@ -156,10 +155,7 @@ export default function ListingsPage() {
               }}
               loading="lazy"
             />
-
-            {/* Info */}
             <div className="flex flex-1 flex-col">
-              {/* Name + Verified */}
               <div className="flex items-center gap-2">
                 <span
                   style={{
@@ -188,8 +184,6 @@ export default function ListingsPage() {
                   </span>
                 )}
               </div>
-
-              {/* Location */}
               <div className="flex items-center gap-1" style={{ marginTop: '4px' }}>
                 <MapPin size={12} color="#8A8A8A" />
                 <span
@@ -202,8 +196,6 @@ export default function ListingsPage() {
                   {provider.location}
                 </span>
               </div>
-
-              {/* Price + Rating */}
               <div
                 className="flex items-center justify-between"
                 style={{ marginTop: '8px' }}
@@ -219,11 +211,7 @@ export default function ListingsPage() {
                   {provider.priceRange}
                 </span>
                 <div className="flex items-center gap-1">
-                  <Star
-                    size={14}
-                    color="#D4A843"
-                    fill="#D4A843"
-                  />
+                  <Star size={14} color="#D4A843" fill="#D4A843" />
                   <span
                     style={{
                       fontSize: '13px',
@@ -235,8 +223,6 @@ export default function ListingsPage() {
                   </span>
                 </div>
               </div>
-
-              {/* Tags */}
               <div className="flex flex-wrap gap-1.5" style={{ marginTop: '10px' }}>
                 {provider.availableToday && (
                   <span
