@@ -10,3 +10,6 @@
 - Do not mix src/ and app/ folders at the project root — use one strategy consistently (either src/app/ or app/ at root). Confidence: 0.70
 - Prefer app/ at project root over src/app/ — keep routing in app/ and shared code in root-level folders (components/, hooks/, lib/, context/). Confidence: 0.70
 
+# design
+- Use the existing design system from .commandcode/instructions.md (dark green #0F3D2E, inline styles, GSAP + framer-motion animations, zustand state, shadcn/ui, Inter font) as the primary style reference. Confidence: 0.75
+
